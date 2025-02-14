@@ -1,6 +1,12 @@
 import ReactModal from "react-modal";
 import css from "./ImageModal.module.css";
+import { Modal } from "../../types";
 ReactModal.setAppElement("#root");
+
+interface ImageModalProps {
+  data: Modal;
+  close: () => void;
+}
 
 const customStyles = {
   content: {
@@ -14,7 +20,7 @@ const customStyles = {
     height: "572px",
   },
 };
-const ImageModal = ({ data, close }) => {
+const ImageModal: React.FC<ImageModalProps> = ({ data, close }) => {
   return (
     <>
       <ReactModal
