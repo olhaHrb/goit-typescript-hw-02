@@ -1,10 +1,10 @@
 import ImageCard from "../ImageCard/ImageCard";
 import css from "./ImageGallery.module.css";
-import { Image } from "../../types";
+import { Image, Modal } from "../../types";
 
 interface ImageGalleryProps {
   images: Image[];
-  onImageClick: (dataModal: Image) => void;
+  onImageClick: (dataModal: Modal) => void;
 }
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({
@@ -15,11 +15,12 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
     <div>
       {images.length > 0 && (
         <ul className={css.list}>
-          {images.map(({ id, urls, alt_description }) => (
-            <li key={id} className={css.item}>
+          {images.map((image) => (
+            <li key={image.id} className={css.item}>
               <ImageCard
-                urls={urls}
-                alt={alt_description}
+                // urls={urls}
+                // alt_description={alt_description}
+                image={image}
                 onImageClick={onImageClick}
               ></ImageCard>
             </li>

@@ -15,7 +15,6 @@ const customStyles = {
   },
 };
 const ImageModal = ({ data, close }) => {
-  //   const closeModal = () => {};
   return (
     <>
       <ReactModal

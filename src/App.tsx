@@ -10,7 +10,7 @@ import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 import { fetchImagesWithTopic } from "./images-api";
 
-import { Image } from "./types";
+import { Image, Modal } from "./types";
 
 const App = () => {
   const [images, setImages] = useState<Image[]>([]);
@@ -20,10 +20,9 @@ const App = () => {
   const [page, setPage] = useState<number>(1);
   const [topic, setTopic] = useState<string>("");
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [dataModal, setDataModal] = useState<Image>({
-    id: "",
-    urls: "",
-    alt_description: "",
+  const [dataModal, setDataModal] = useState<Modal>({
+    src: "",
+    alt: "",
   });
 
   const handleSearch = async (newTopic: string): Promise<void> => {
@@ -62,7 +61,7 @@ const App = () => {
     getImages();
   }, [topic, page]);
 
-  const onImageClick = (dataModal: Image): void => {
+  const onImageClick = (dataModal: Modal): void => {
     // console.log(dataModal);
     setModalIsOpen(true);
     setDataModal(dataModal);
