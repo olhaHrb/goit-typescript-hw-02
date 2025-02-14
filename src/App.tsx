@@ -10,23 +10,28 @@ import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 import { fetchImagesWithTopic } from "./images-api";
 
-const App = () => {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [loadBtn, setLoadBtn] = useState(false);
-  const [page, setPage] = useState(1);
-  const [topic, setTopic] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [dataModal, setDataModal] = useState({});
+interface Image {
+  src: string;
+  alt: string;
+}
 
-  const handleSearch = async (newTopic) => {
+const App = () => {
+  const [images, setImages] = useState<Image[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [loadBtn, setLoadBtn] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [topic, setTopic] = useState<string>("");
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [dataModal, setDataModal] = useState<Image>({ src: "", alt: "" });
+
+  const handleSearch = async (newTopic: string): Promise<void> => {
     setImages([]);
     setPage(1);
     setTopic(newTopic);
   };
 
-  const handleLoadMore = () => {
+  const handleLoadMore = (): void => {
     setPage(page + 1);
   };
 
@@ -40,7 +45,7 @@ const App = () => {
         setLoading(true);
         setLoadBtn(false);
 
-        const data = await fetchImagesWithTopic(topic, page);
+        const data: Image[] = await fetchImagesWithTopic(topic, page);
         setImages((prevImages) => {
           return [...prevImages, ...data];
         });
@@ -56,7 +61,7 @@ const App = () => {
     getImages();
   }, [topic, page]);
 
-  const onImageClick = (dataModal) => {
+  const onImageClick = (dataModal: Image) => {
     // console.log(dataModal);
     setModalIsOpen(true);
     setDataModal(dataModal);

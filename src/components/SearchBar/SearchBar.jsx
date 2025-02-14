@@ -1,5 +1,6 @@
 import css from "./SearchBar.module.css";
 import toast, { Toaster } from "react-hot-toast";
+//import { FormEvent } from "react";
 
 const SearchBar = ({ onSearch }) => {
   const handleSubmit = (evt) => {
